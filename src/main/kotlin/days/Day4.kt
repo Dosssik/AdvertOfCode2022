@@ -4,8 +4,9 @@ import java.io.File
 
 
 fun main() {
-    val elfPairs = File("src/main/kotlin/day2/input/input_day_4.txt").readText().lines().map(::toElfPair)
-//    task1(elfPairs)
+    val elfPairs = File("src/main/kotlin/days/input/input_day_4.txt").readText().lines().map(::toElfPair)
+    task1(elfPairs)
+    println()
     task2(elfPairs)
 }
 

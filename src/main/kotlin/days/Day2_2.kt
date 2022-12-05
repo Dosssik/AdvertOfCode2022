@@ -3,7 +3,7 @@ package days
 import java.io.File
 
 fun main() {
-    val data = File("src/main/kotlin/day2/input/input_day_2.txt").readText()
+    val data = File("src/main/kotlin/days/input/input_day_2.txt").readText()
     val totalScore = data.lines().sumOf { round ->
         calculateScore(round.first(), round.last())
     }

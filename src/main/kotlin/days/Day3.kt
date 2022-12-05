@@ -5,12 +5,12 @@ import java.io.File
 private val priorityIndexes = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 fun main() {
-    val bags = File("src/main/kotlin/day2/input/input_day_3.txt").readText().lines()
+    val bags = File("src/main/kotlin/days/input/input_day_3.txt").readText().lines()
     task1(bags)
+    println()
     task2(bags)
 }
 
-/************************* TASK 1 *****************************/
 private fun task1(bags: List<String>) {
     val sumOfPriorities = bags.sumOf { bag ->
         calculatePriority(bag)
@@ -26,8 +26,6 @@ fun calculatePriority(bag: String): Int {
     val intersection = firstSection.toSet().intersect(lastSection.toSet())
     return priorityIndexes.indexOf(intersection.first())
 }
-
-/************************* TASK 2 *****************************/
 
 private fun task2(bags: List<String>) {
     val groups = bags.chunked(3)
