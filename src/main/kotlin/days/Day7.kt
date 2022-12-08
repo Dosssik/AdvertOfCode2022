@@ -69,16 +69,34 @@ fun main() {
         dir to filesSizeSum
     }.filter { (_, filesSize) -> filesSize < MAX_DIR_SIZE }
 
-    val answer = dirsWithFilesSizeLessThanLimit.map { (dir, filesSize) ->
+    val answerForFirst = dirsWithFilesSizeLessThanLimit.map { (dir, filesSize) ->
         dir.name to calculateDirSizeWithChildren(dir, cache)
     }
         .filter { (name, size) ->
             size < MAX_DIR_SIZE
-        }
-        .map { it.second }
-        .sum()
+        }.sumOf { it.second }
 
-    println("Answer $answer")
+    println("Answer for task1: $answerForFirst")
+
+    val allFilesSize = calculateDirSizeWithChildren(currentDir, emptyMap())
+    println("all files size = $allFilesSize")
+    val spaceLeft = 70_000_000 - allFilesSize
+    println("space left = $spaceLeft")
+    val spaceToClean = 30_000_000 - spaceLeft
+    println("space to clean = $spaceToClean")
+
+    val dirNamesWithSizes = visitedNodes.map { dir ->
+        dir.name to calculateDirSizeWithChildren(dir, cache)
+    }
+
+    val answerForSecond = dirNamesWithSizes.map { (_, size) -> size }
+        .sorted()
+        .apply {
+            forEach { println("Dir size: $it") }
+        }
+        .first { size -> size > spaceToClean }
+
+    println("Answer for task2: $answerForSecond")
 }
 
 private fun calculateDirSizeWithChildren(dir: Dir, cache: Map<String, Int>): Int {
